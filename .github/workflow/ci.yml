@@ -8,7 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: action/checkout@v3
+      - uses: action/checkout@v2
       - name: Use NodeJs
         uses: action/checkout@v1
           with:
