@@ -3,7 +3,7 @@ import './drink.css';
 const Drink = () => {
   return (
     <>
-      <div>
+      <div className=''>
 
       </div>
     </>
