@@ -4,6 +4,6 @@ import App from './App';
 
 test('check header footer exist', () => {
   render(<App />);
-  const someText = screen.getByText(/learn abc/i);
+  const someText = screen.getByText(/coffee/i);
   expect(someText).toBeInTheDocument();
 })
