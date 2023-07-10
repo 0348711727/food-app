@@ -6,9 +6,8 @@ import { Drink } from './Component';
 function App() {
   return (
     <div className="App">
-      {/* <a>Learn abc</a> */}
       <Header />
-      {/* <Footer /> */}
+      <Footer />
 
 
       <Drink />

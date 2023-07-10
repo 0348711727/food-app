@@ -1,4 +1,4 @@
-import { DownOutlined, CoffeeOutlined, InfoCircleOutlined, CarOutlined, PhoneOutlined } from '@ant-design/icons'
+import { CarOutlined, PhoneOutlined } from '@ant-design/icons'
 import { FormatLocaleNumber } from './formatLocaleNumber';
 const money = FormatLocaleNumber('50000')
 const numberStore = 100;
