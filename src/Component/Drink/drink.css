@@ -1,6 +1,53 @@
-.drink {
-  width: 100px;
-  height: 100px;
-  background-color: black;
+.menu_list_home {
   position: relative;
+  top: 100px;
+  margin: auto;
+  width: 95%;
+  padding-top: 1rem;
+}
+
+.flex_wrap {
+  flex-wrap: wrap;
+}
+
+.display_flex {
+  display: flex;
+}
+
+.menu_item {
+  min-height: 145px;
+  border-radius: 50%;
+  margin: 0 10px 40px;
+  -webkit-box-flex: 0 0 calc(20% - 15px);
+}
+
+.menu_banner {
+  flex: 0 0 calc(50% - 35px);
+  margin: 0 15px 40px 15px;
+}
+
+.menu_item,
+.menu_item_image {
+  position: relative;
+}
+
+.menu_item_image {
+  box-shadow: 20px 20px 50px rgb(183, 183, 183);
+}
+
+.menu_item_info {
+  font-size: var(--h5-font-size);
+  color: #00000099 !important;
+  margin: 20px 0;
+
+}
+
+.carousel {
+  position: relative;
+  top: 100;
+  width: 100%;
+}
+
+.menu_item_carousel {
+  width: 100%;
 }

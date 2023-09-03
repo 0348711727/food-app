@@ -1,11 +1,101 @@
+import { useEffect, useRef, useState } from 'react';
 import './drink.css';
+import Loading from '../Loading/Loading';
+import { useLoading } from '../../customHooks/useLoading';
+import { useDisable } from '../../customHooks/useDisable';
+import { callApi } from '../../service/apiService';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Carousel } from 'antd';
+import { FormatLocaleNumber } from '../../Utils/formatLocaleNumber';
+import { Tooltip } from 'react-tooltip';
 
 const Drink = () => {
+  const titleRef = useRef();
+  const [file, setFile] = useState('');
+  let { isLoading, setIsLoading } = useLoading(false);
+  let { isDisabled, setIsDisabled } = useDisable(false);
+  const [product, setProduct] = useState([]);
+  useEffect(() => {
+    async function getData() {
+      try {
+        setIsLoading(true);
+        const res = await callApi({ url: 'http://localhost:5000/api/product/getAllProduct', method: 'get' })
+        setProduct(res.data.data)
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getData();
+  }, []);
+
+  // const memoizedProduct = useMemo(() => product, [product]);
+
+  const handleSubmit = async (event) => {
+    setIsLoading(true);
+    setIsDisabled(true);
+    const formData = new FormData();
+    formData.append('image', file);
+    formData.append('title', titleRef.current.value);
+    try {
+      // const res = await callApi({ url: 'http://localhost:5000/api/product/getAllProduct', method: 'get', config: { headers: { 'Content-Type': 'multipart/form-data' } } })
+      // setProduct(res.data.data)
+      const res = await callApi({ url: 'http://localhost:5000/api/product/addProduct', method: 'post', body: formData, config: { headers: { 'Content-Type': 'multipart/form-data' } } })
+      setProduct(res.data.data)
+    } catch (error) {
+      // console.log(error)
+    }
+    setIsLoading(false);
+    setIsDisabled(false);
+  }
   return (
     <>
-      <div className=''>
-
-      </div>
+      <Tooltip id="my-tooltip" />
+      <Carousel className='carousel' autoplay>
+        {
+          product && product.map(({ imageName, title, _id }, index) => (
+            <div className='menu_item_carousel' key={index}>
+              <a data-tooltip-id="my-tooltip" data-tooltip-content={title} href={`/product/${_id}`}>
+                <LazyLoadImage className='lazyloaded' key={imageName} src={`https://d3jgp7w89aozly.cloudfront.net/food-image/${imageName}`} alt='drink' />
+              </a>
+            </div>
+          ))
+        }
+      </Carousel>
+      <section className='menu_list_home flex_wrap display_flex'>
+        {/* <form>
+          <div className="form-group">
+            <input type="file" onChange={(e) => setFile(e.target.files[0])} className="form-control-file" name="uploaded_file" disabled={isDisabled} />
+            <input type='text' ref={titleRef} disabled={isDisabled} />
+            <button onClick={handleSubmit} type="button" className="btn btn-default" disabled={isDisabled} >submit</button>
+          </div>
+        </form> */}
+        <div className='menu_item menu_banner'>
+          <a data-tooltip-id="my-tooltip" data-tooltip-content='Trà xanh tây bắc' href='/'>
+            <LazyLoadImage className='lazyloaded' alt="Trà xanh tây bắc" src='https://file.hstatic.net/1000075078/file/banner_app_2_c3dea7cad7cb4fad94f162ea6ccd388b.jpg' />
+          </a>
+        </div>
+        {
+          product && product.map(({ imageName, title, price, _id }, index) => (
+            <div className='menu_item' key={index}>
+              <div className='menu_item_image'>
+                <a data-tooltip-id="my-tooltip" data-tooltip-content={title} href={`/product/${_id}`}>
+                  <LazyLoadImage className='lazyloaded' effect="blur" key={imageName} src={`https://d3jgp7w89aozly.cloudfront.net/food-image/${imageName}`} alt='drink' />
+                </a>
+              </div>
+              <div className='menu_item_info'>
+                <h3>{title}</h3>
+                <div className='price_product_item'>
+                  {FormatLocaleNumber(price)} đ
+                </div>
+              </div>
+            </div>
+          ))
+        }
+        {
+          isLoading && <Loading />
+        }
+      </section>
     </>
   );
 }

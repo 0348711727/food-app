@@ -6,7 +6,7 @@ import React from 'react';
 import { store } from './store/store';
 import { Provider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
-import i18next from './TranslatationService/i18Translate';
+import i18next from './service/TranslatationService/i18Translate';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

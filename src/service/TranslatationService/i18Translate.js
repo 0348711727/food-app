@@ -14,10 +14,8 @@ i18next
       }
     },
     fallbackLng: 'vn',
-    debug: true,
-    // interpolation: {
-    //   escapeValue: false, // not needed for React
-    // },
+    debug: false,
+
   });
 
 export default i18next;
