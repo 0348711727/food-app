@@ -1,9 +1,16 @@
-.header-top {
-  width: 100%;
+.header {
+  background-color: var(--header-color);
+  z-index: 100;
   position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.nav {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: space-around;
 }
 
 .header-top ul {
@@ -11,67 +18,35 @@
   justify-content: center;
 }
 
-
-.header-main ul {
-  width: 80%;
+.nav__list {
+  display: flex;
+  cursor: pointer;
+  /* justify-content: space-between; */
+  width: 100%;
+  column-gap: 2rem;
+  align-items: center;
   justify-content: center;
 }
 
-.ant-dropdown-trigger {
-  margin-top: 10px;
+.nav__list li &:hover {
+  color: var(--hover-text-color);
 }
 
-.header-main {
-  top: 50px;
-  width: 100%;
-  position: absolute;
-  /* top: 10px; */
-  height: 50px;
-  position: fixed;
-  display: flex;
-  justify-content: space-around;
-  padding-bottom: 5px;
-  /* border-bottom: 1px solid black; */
-  /* background-color: lightgray; */
-  transition: 0.5 ease-in-out;
+.nav__link {
+  color: var(--title-color);
+  font-size: var(--large-font-size);
+  font-weight: var(--weight-700);
 }
 
 .header-logo {
-  width: 100px;
-  height: 50px;
+  width: 200px;
+  height: 80px;
   cursor: pointer;
 }
 
-
-.rightMenu {
-  position: relative;
-  top: 10px;
-  cursor: pointer;
-  display: flex;
-}
-
-.item-in-cart {
-  position: relative;
-  top: -10px;
-  right: -8px;
-  background-color: red;
-  border-radius: 50%;
-  width: 16px;
-  height: 16px;
-}
-
-.number-item {
-  position: relative;
-  top: -20px;
-  left: 3px;
-  color: white;
-  z-index: 999
-}
-
-.avatar {
-  position: relative;
-  right: -15px;
-  width: 40px;
-  height: 40px;
-  bottom: 5px;
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  opacity: 0.6;
 }

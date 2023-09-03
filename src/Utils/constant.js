@@ -1,4 +1,4 @@
-import { CarOutlined, PhoneOutlined } from '@ant-design/icons'
+import { CarOutlined } from '@ant-design/icons'
 import { FormatLocaleNumber } from './formatLocaleNumber';
 const money = FormatLocaleNumber('50000')
 const numberStore = 100;
@@ -7,11 +7,6 @@ const SubMenus = [
     label: 'storeAroundVN',
     key: 'Store_Around_VN',
     extraBefore: numberStore
-  },
-  {
-    label: 'booking',
-    key: 'Booking',
-    icon: <PhoneOutlined />
   },
   {
     label: 'freeshipFrom',
@@ -36,7 +31,19 @@ const MainMenus = [
   {
     label: 'homeStory',
     key: 'Home_Story',
-  }
+  },
+  {
+    label: 'cloudFee',
+    key: 'cloudFee',
+  },
+  {
+    label: 'store',
+    key: 'store',
+  },
+  {
+    label: 'hire',
+    key: 'hire',
+  },
 ];
 
 const TranslateLang = [
@@ -50,3 +57,8 @@ const TranslateLang = [
   }
 ]
 export { SubMenus, MainMenus, TranslateLang }
+
+export const language = {
+  vn: 'vn',
+  en: 'en'
+}

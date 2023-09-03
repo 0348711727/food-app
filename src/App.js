@@ -1,20 +1,29 @@
 import './App.css';
 import React from "react";
-import { Header, Footer } from './Pages';
-import { Drink } from './Component';
+import { About, Coffee } from './Pages';
+import { Layout, ProductDetail } from './Component';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { NotFound } from './Pages/NotFound/NotFound';
+import { Home } from './Pages/Home/Home';
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Footer />
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Layout />}>
+            <Route index element={<Home />}></Route>
+            <Route path='about' element={<About />}></Route>
+            <Route path='coffee' element={<Coffee />}></Route>
+            <Route path='product/:id' element={<ProductDetail />}></Route>
+            {/* <Route path='about' element={<About />}></Route>
+            <Route path='about' element={<About />}></Route> */}
 
-
-      <Drink />
-
-
-
-    </div>
+            <Route path='*' element={<NotFound />}></Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
