@@ -8,6 +8,12 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Carousel } from 'antd';
 import { FormatLocaleNumber } from '../../Utils/formatLocaleNumber';
 import { Tooltip } from 'react-tooltip';
+import banner1 from '../../assets/banner1.jpg';
+import banner2 from '../../assets/banner2.webp';
+import banner3 from '../../assets/banner3.webp';
+import banner4 from '../../assets/banner4.webp';
+import banner5 from '../../assets/banner5.webp';
+
 
 const Drink = () => {
   const titleRef = useRef();
@@ -51,17 +57,19 @@ const Drink = () => {
   return (
     <>
       <Tooltip id="my-tooltip" />
-      <Carousel className='carousel' autoplay>
-        {
-          product && product.map(({ imageName, title, _id }, index) => (
-            <div className='menu_item_carousel' key={index}>
-              <a data-tooltip-id="my-tooltip" data-tooltip-content={title} href={`/product/${_id}`}>
-                <LazyLoadImage className='lazyloaded' key={imageName} src={`https://d3jgp7w89aozly.cloudfront.net/food-image/${imageName}`} alt='drink' />
-              </a>
-            </div>
-          ))
-        }
-      </Carousel>
+      <div className='carousel'>
+        <Carousel autoplay>
+          {
+            [banner1, banner2, banner3, banner4, banner5].map((value, index) => (
+              <div className='menu_item_carousel' key={index}>
+                <a data-tooltip-id="my-tooltip" data-tooltip-content='a' href='/collections/all'>
+                  <LazyLoadImage className='lazyloaded' key={value} src={value} alt='banner' />
+                </a>
+              </div>
+            ))
+          }
+        </Carousel>
+      </div>
       <section className='menu_list_home flex_wrap display_flex'>
         {/* <form>
           <div className="form-group">
@@ -79,8 +87,8 @@ const Drink = () => {
           product && product.map(({ imageName, title, price, _id }, index) => (
             <div className='menu_item' key={index}>
               <div className='menu_item_image'>
-                <a data-tooltip-id="my-tooltip" data-tooltip-content={title} href={`/product/${_id}`}>
-                  <LazyLoadImage className='lazyloaded' effect="blur" key={imageName} src={`https://d3jgp7w89aozly.cloudfront.net/food-image/${imageName}`} alt='drink' />
+                <a data-tooltip-id="my-tooltip" data-tooltip-content={title} href={`/product/${imageName}`}>
+                  <LazyLoadImage className='lazyloaded' effect="blur" key={imageName} src={`https://d3jgp7w89aozly.cloudfront.net/food-image/${imageName}.webp`} alt='drink' />
                 </a>
               </div>
               <div className='menu_item_info'>
