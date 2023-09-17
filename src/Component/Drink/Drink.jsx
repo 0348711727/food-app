@@ -1,9 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import './drink.css';
 import Loading from '../Loading/Loading';
-import { useLoading } from '../../customHooks/useLoading';
-import { useDisable } from '../../customHooks/useDisable';
-import { callApi } from '../../service/apiService';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Carousel } from 'antd';
 import { FormatLocaleNumber } from '../../Utils/formatLocaleNumber';
@@ -13,47 +10,31 @@ import banner2 from '../../assets/banner2.webp';
 import banner3 from '../../assets/banner3.webp';
 import banner4 from '../../assets/banner4.webp';
 import banner5 from '../../assets/banner5.webp';
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllProduct } from '../../store/reducer/product.reducer';
 const Drink = () => {
-  const titleRef = useRef();
-  const [file, setFile] = useState('');
-  let { isLoading, setIsLoading } = useLoading(false);
-  let { isDisabled, setIsDisabled } = useDisable(false);
-  const [product, setProduct] = useState([]);
+  const dispatch = useDispatch();
+  const productState = useSelector(state => state.products);
   useEffect(() => {
-    async function getData() {
-      try {
-        setIsLoading(true);
-        const res = await callApi({ url: 'http://localhost:5000/api/product/getAllProduct', method: 'get' })
-        setProduct(res.data.data)
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    getData();
-  }, []);
-
-  // const memoizedProduct = useMemo(() => product, [product]);
-
-  const handleSubmit = async (event) => {
-    setIsLoading(true);
-    setIsDisabled(true);
-    const formData = new FormData();
-    formData.append('image', file);
-    formData.append('title', titleRef.current.value);
-    try {
-      // const res = await callApi({ url: 'http://localhost:5000/api/product/getAllProduct', method: 'get', config: { headers: { 'Content-Type': 'multipart/form-data' } } })
-      // setProduct(res.data.data)
-      const res = await callApi({ url: 'http://localhost:5000/api/product/addProduct', method: 'post', body: formData, config: { headers: { 'Content-Type': 'multipart/form-data' } } })
-      setProduct(res.data.data)
-    } catch (error) {
-      // console.log(error)
-    }
-    setIsLoading(false);
-    setIsDisabled(false);
-  }
+    dispatch(fetchAllProduct());
+  }, [dispatch]);
+  // const handleSubmit = async (event) => {
+  //   setIsLoading(true);
+  //   setIsDisabled(true);
+  //   const formData = new FormData();
+  //   formData.append('image', file);
+  //   formData.append('title', titleRef.current.value);
+  //   try {
+  //     // const res = await callApi({ url: `${BE_URL}/api/product/getAllProduct`, method: 'get', config: { headers: { 'Content-Type': 'multipart/form-data' } } })
+  //     // setProduct(res.data.data)
+  //     const res = await callApi({ url: `${BE_URL}/api/product/addProduct', `ethod: 'post', body: formData, config: { headers: { 'Content-Type': 'multipart/form-data' } } })
+  //     setProduct(res.data.data)
+  //   } catch (error) {
+  //     // console.log(error)
+  //   }
+  //   setIsLoading(false);
+  //   setIsDisabled(false);
+  // }
   return (
     <>
       <Tooltip id="my-tooltip" />
@@ -62,7 +43,7 @@ const Drink = () => {
           {
             [banner1, banner2, banner3, banner4, banner5].map((value, index) => (
               <div className='menu_item_carousel' key={index}>
-                <a data-tooltip-id="my-tooltip" data-tooltip-content='a' href='/collections/all'>
+                <a data-tooltip-id="my-tooltip" data-tooltip-content='' href='/collections/all'>
                   <LazyLoadImage className='lazyloaded' key={value} src={value} alt='banner' />
                 </a>
               </div>
@@ -84,7 +65,7 @@ const Drink = () => {
           </a>
         </div>
         {
-          product && product.map(({ imageName, title, price, _id }, index) => (
+          productState.data && productState.data.map(({ imageName, title, price }, index) => (
             <div className='menu_item' key={index}>
               <div className='menu_item_image'>
                 <a data-tooltip-id="my-tooltip" data-tooltip-content={title} href={`/product/${imageName}`}>
@@ -101,7 +82,7 @@ const Drink = () => {
           ))
         }
         {
-          isLoading && <Loading />
+          productState.isLoading && <Loading />
         }
       </section>
     </>
