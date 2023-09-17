@@ -22,7 +22,6 @@ export const fetchAllProduct = createAsyncThunk('fetchAll', async () => {
 
 export const fetchDetailProduct = createAsyncThunk('fetchDetail', async (id) => {
   const res = await callApi({ url: `${BE_URL}/api/product/productDetail/${id}`, method: 'get' })
-  console.log(res)
   return res.data.data;
 })
 

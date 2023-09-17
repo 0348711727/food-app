@@ -12,6 +12,7 @@ import banner4 from '../../assets/banner4.webp';
 import banner5 from '../../assets/banner5.webp';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllProduct } from '../../store/reducer/product.reducer';
+import { AWS_CDN } from '../../environment';
 const Drink = () => {
   const dispatch = useDispatch();
   const productState = useSelector(state => state.products);
@@ -69,7 +70,7 @@ const Drink = () => {
             <div className='menu_item' key={index}>
               <div className='menu_item_image'>
                 <a data-tooltip-id="my-tooltip" data-tooltip-content={title} href={`/product/${imageName}`}>
-                  <LazyLoadImage className='lazyloaded' effect="blur" key={imageName} src={`https://d3jgp7w89aozly.cloudfront.net/food-image/${imageName}.webp`} alt='drink' />
+                  <LazyLoadImage className='lazyloaded' effect="blur" key={imageName} src={`${AWS_CDN}${imageName}.webp`} alt='drink' />
                 </a>
               </div>
               <div className='menu_item_info'>
