@@ -1,7 +1,7 @@
 import './App.css';
 import React from "react";
-import { About, Coffee } from './Pages';
-import { Layout, ProductDetail } from './Component';
+import { About, Coffee, ProductDetail } from './Pages';
+import { Layout } from './Component';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { NotFound } from './Pages/NotFound/NotFound';
 import { Home } from './Pages/Home/Home';

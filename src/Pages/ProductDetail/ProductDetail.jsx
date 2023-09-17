@@ -4,8 +4,11 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDetailProduct } from '../../store/reducer/product.reducer';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import Loading from '../Loading/Loading';
+import Loading from '../../Component/Loading/Loading';
 import { Button } from 'antd';
+import { AWS_CDN } from '../../environment';
+import { SizeDrink, ToppingDrink } from '../../Component';
+
 /**
 * @author
 * @function ProductDetail
@@ -56,39 +59,42 @@ const ProductDetail = (props) => {
 
   return (
     <>
-      {product.isLoading && <Loading />}
-      <div className='product_detail'>
-        <div className='image_detail'>
-          {product.detail && <LazyLoadImage src={`https://d3jgp7w89aozly.cloudfront.net/food-image/${product.detail.imageName}.webp`} />}
-        </div>
-        <div className='product_info'>
-          <h2>
-            {product.detail && product.detail.title}
-            <br />
-            {product.detail && setPrice(tempProduct)} đ
-          </h2>
-          <div className='product_size'>
-            <p>Chọn size(bắt buộc)</p>
-            <div className='d-flex'>
-              <div className='product__info__item__list__item' id='size1' onClick={() => chooseSize('s')}>Nhỏ + 0đ</div>
-              <div className='product__info__item__list__item' id='size2' onClick={() => chooseSize('m')}>Vừa + 5.000đ</div>
-              <div className='product__info__item__list__item' id='size3' onClick={() => chooseSize('l')}>Lớn + 10.000đ</div>
+      {
+        product.isLoading && <Loading />}
+      {
+        product.detail &&
+        <>
+          <div className='route d-flex'>
+            <a href='/collections/all'>Menu /</a>
+            <a href='/collection/san-pham-hot-trang-chu'>Sản phẩm hot trang chủ /</a>
+            <p>{product.detail.title}</p>
+          </div>
+          <div className='product_detail'>
+            <div className='image_detail'>
+              {<LazyLoadImage src={`${AWS_CDN}${product.detail.imageName}.webp`} />}
+            </div>
+            <div className='product_info'>
+              <h2>
+                {product.detail.title}
+                <br />
+                {setPrice(tempProduct)} đ
+              </h2>
+              {
+                product.detail.category === 'drink' &&
+                <>
+                  <div className='product_size'>
+                    <SizeDrink chooseSize={chooseSize} />
+                  </div>
+                  <div className='product_topping'>
+                    <ToppingDrink chooseTopping={chooseTopping} />
+                  </div>
+                </>
+              }
+              <Button className='button_add' size='large'>Thêm vào giỏ hàng</Button>
             </div>
           </div>
-          <div className='product_topping'>
-            <p>Topping</p>
-            <div className='d-flex flex_wrap'>
-              <div className='product__info__item__list__topping' onClick={() => chooseTopping('0')}>Kem Phô Mai Macchiato + 10.000đ</div>
-              <div className='product__info__item__list__topping' onClick={() => chooseTopping('1')}>Shot Espresso + 10.000đ</div>
-              <div className='product__info__item__list__topping' onClick={() => chooseTopping('2')}>Trân châu trắng + 10.000đ</div>
-              <div className='product__info__item__list__topping' onClick={() => chooseTopping('3')}>Sốt Caramel + 10.000đ</div>
-              <div className='product__info__item__list__topping' onClick={() => chooseTopping('4')}>Thạch Cà Phê + 10.000đ</div>
-              <div className='product__info__item__list__topping' onClick={() => chooseTopping('5')}>Thạch Oloong nướng + 10.000đ</div>
-            </div>
-          </div>
-          <Button className='button_add' size='large'>Thêm vào giỏ hàng</Button>
-        </div>
-      </div>
+        </>
+      }
     </>
   )
 }
