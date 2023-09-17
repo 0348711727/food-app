@@ -14,7 +14,9 @@
   margin-right: auto;
   margin-top: 50px;
   margin-bottom: 30px;
-  position: relative;
+  position: fixed;
+  top: 200px;
+  left: 700px;
   z-index: 999;
 }
 

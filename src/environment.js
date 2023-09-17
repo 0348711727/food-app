@@ -1,0 +1,1 @@
+export const BE_URL = 'https://food-app-api-three.vercel.app';
