@@ -38,7 +38,7 @@ const ProductDetail = (props) => {
   }
   const setPrice = (product) => {
     let price = tempPrice;
-    price += product.size === 'l' ? 10000 : product.size === 'm' ? 5000 : 0;
+    price += product.size === 'l' ? 10000 : product.size === 'm' ? 6000 : 0;
     const toppingPrice = product.topping.reduce((total, current) => total + current.price, 0);
     price += toppingPrice;
     return price;
