@@ -1,4 +1,6 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
+import { FormatLocaleNumber } from '../../Utils/formatLocaleNumber';
 
 /**
 * @author
@@ -6,16 +8,20 @@ import React from 'react'
 **/
 
 const ToppingDrink = ({ chooseTopping }) => {
+  const toppingList = useSelector(state => state.products.detail.topping);
   return (
     <div>
-      <p>Topping</p>
+      {toppingList.length && <p>Topping</p>}
       <div className='d-flex flex_wrap'>
-        <div className='product__info__item__list__topping' onClick={() => chooseTopping('0')}>Kem Phô Mai Macchiato + 10.000đ</div>
-        <div className='product__info__item__list__topping' onClick={() => chooseTopping('1')}>Shot Espresso + 10.000đ</div>
-        <div className='product__info__item__list__topping' onClick={() => chooseTopping('2')}>Trân châu trắng + 10.000đ</div>
-        <div className='product__info__item__list__topping' onClick={() => chooseTopping('3')}>Sốt Caramel + 10.000đ</div>
-        <div className='product__info__item__list__topping' onClick={() => chooseTopping('4')}>Thạch Cà Phê + 10.000đ</div>
-        <div className='product__info__item__list__topping' onClick={() => chooseTopping('5')}>Thạch Oloong nướng + 10.000đ</div>
+        {
+          toppingList.length && toppingList.map((value, index) =>
+            <div
+              key={value.title}
+              className='product__info__item__list__topping'
+              onClick={() => chooseTopping(index)}>{value.title} + {FormatLocaleNumber(value.price)}</div>
+          )
+        }
+
       </div>
     </div>
   )

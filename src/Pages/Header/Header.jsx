@@ -64,8 +64,8 @@ function Header() {
                 </li>
               ))}
             </ul>
-
           </div>
+          <div className="burger-menu">&#9776;</div>
           <Dropdown menu={{ items, onClick }}>
             <div className="nav__link" onClick={(e) => e.preventDefault()}>
               <Space>

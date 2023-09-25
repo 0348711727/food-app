@@ -6,8 +6,10 @@ import { Drink } from '../../Component'
 * @function Home
 **/
 
-export const Home = (props) => {
+const Home = (props) => {
   return (
     <Drink />
   )
 }
+
+export default Home;

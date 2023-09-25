@@ -1,9 +1,9 @@
 .route {
-  align-items: center;
-  top: 120px;
-  margin-left: 1rem;
   position: relative;
-  margin-left: 8rem;
+  align-items: center;
+  top: 100px;
+  margin-left: 1rem;
+  margin: 0 0 5rem 8rem;
   padding-top: 2rem;
   z-index: 1;
 }
@@ -15,8 +15,7 @@
 }
 
 .product_detail {
-  position: absolute;
-  top: 150px;
+  position: relative;
   display: flex;
   min-height: 100vh;
 }
@@ -25,11 +24,11 @@
 .image_detail {
   margin-left: 5rem;
   width: 50%;
+  min-width: 500px;
   padding: 50px;
 }
 
 .product_info {
-  margin-top: 3rem;
   width: 50%;
 }
 
@@ -50,6 +49,7 @@
   background-color: hsl(37, 100%, 50%);
   font-weight: var(--weight-500);
   color: white;
+  margin-top: 2rem;
 }
 
 .active {

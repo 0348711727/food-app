@@ -4,11 +4,11 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDetailProduct } from '../../store/reducer/product.reducer';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import Loading from '../../Component/Loading/Loading';
 import { Button } from 'antd';
 import { AWS_CDN } from '../../environment';
-import { SizeDrink, ToppingDrink } from '../../Component';
-
+import { Loading, SizeDrink, ToppingDrink } from '../../Component';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 /**
 * @author
 * @function ProductDetail
@@ -49,7 +49,7 @@ const ProductDetail = (props) => {
     if (index >= 0) {
       updatedTopping.splice(index, 1);
     } else {
-      updatedTopping.push({ id, "price": 10000 });
+      updatedTopping.push({ id, price: product.detail.topping[id].price });
     }
     const chooseToppingNode = document.getElementsByClassName('product__info__item__list__topping');
     chooseToppingNode[id].classList.toggle('active');
@@ -59,42 +59,35 @@ const ProductDetail = (props) => {
 
   return (
     <>
-      {
-        product.isLoading && <Loading />}
-      {
-        product.detail &&
-        <>
-          <div className='route d-flex'>
-            <a href='/collections/all'>Menu /</a>
-            <a href='/collection/san-pham-hot-trang-chu'>Sản phẩm hot trang chủ /</a>
-            <p>{product.detail.title}</p>
-          </div>
-          <div className='product_detail'>
-            <div className='image_detail'>
-              {<LazyLoadImage src={`${AWS_CDN}${product.detail.imageName}.webp`} />}
-            </div>
-            <div className='product_info'>
-              <h2>
-                {product.detail.title}
-                <br />
-                {setPrice(tempProduct)} đ
-              </h2>
-              {
-                product.detail.category === 'drink' &&
-                <>
-                  <div className='product_size'>
-                    <SizeDrink chooseSize={chooseSize} />
-                  </div>
-                  <div className='product_topping'>
-                    <ToppingDrink chooseTopping={chooseTopping} />
-                  </div>
-                </>
-              }
-              <Button className='button_add' size='large'>Thêm vào giỏ hàng</Button>
-            </div>
-          </div>
-        </>
-      }
+      <div className='route d-flex'>
+        <a href='/collections/all'>Menu /</a>
+        <a href='/collection/san-pham-hot-trang-chu'>Sản phẩm hot trang chủ /</a>
+        <p>{product?.detail?.title || <Skeleton />}</p>
+      </div>
+      <div className='product_detail'>
+        <div className='image_detail'>
+          {product?.detail?.imageName ? <LazyLoadImage className='skeleton' src={`${AWS_CDN}${product.detail.imageName}.webp`} /> : <Skeleton height={'400px'} width={'300px'} />}
+        </div>
+        <div className='product_info'>
+          <h2>
+            {product?.detail?.title || <Skeleton height={'50px'} width={'300px'} />}
+            <br />
+            <p>{product?.detail?.title ? (setPrice(tempProduct) + 'đ') : <Skeleton height={'50px'} />}</p>
+          </h2>
+          {
+            product?.detail?.category === 'drink' &&
+            <>
+              <div className='product_size'>
+                <SizeDrink chooseSize={chooseSize} />
+              </div>
+              <div className='product_topping'>
+                <ToppingDrink chooseTopping={chooseTopping} />
+              </div>
+            </>
+          }
+          <Button className='button_add' size='large'>Thêm vào giỏ hàng</Button>
+        </div>
+      </div>
     </>
   )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Footer, Header } from '../../Pages';
 import { Outlet } from 'react-router-dom';
+import Cart from '../Cart/Cart';
 
 /**
 * @author
@@ -15,6 +16,7 @@ const Layout = (props) => {
         <Outlet />
       </div>
       <Footer />
+      <Cart />
     </div>
   )
 }
