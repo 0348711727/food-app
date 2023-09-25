@@ -1,10 +1,9 @@
 import './App.css';
 import React from "react";
-import { About, Coffee, ProductDetail } from './Pages';
+import { About, Coffee, ProductDetail, Home } from './Pages';
 import { Layout } from './Component';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { NotFound } from './Pages/NotFound/NotFound';
-import { Home } from './Pages/Home/Home';
 
 function App() {
   return (

@@ -1,12 +1,9 @@
 .footer {
   clear: both;
-  position: relative;
-  height: 100px;
-  margin-bottom: 10px;
+  height: 10rem;
   background-color: black;
 }
 
 .footer-title {
   color: var(--header-color);
-
 }
