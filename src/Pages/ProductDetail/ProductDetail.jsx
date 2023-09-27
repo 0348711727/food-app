@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./product-detail.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDetailProduct } from '../../store/reducer/product.reducer';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { Button } from 'antd';
+import { Button, InputNumber } from 'antd';
 import { AWS_CDN } from '../../environment';
-import { Loading, SizeDrink, ToppingDrink } from '../../Component';
+import { SizeDrink, ToppingDrink } from '../../Component';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 /**
@@ -19,12 +19,11 @@ const ProductDetail = (props) => {
 
   const product = useSelector(state => state.products);
   const dispatch = useDispatch();
-  const [tempPrice, setTempPrice] = useState(0);
-  const [tempProduct, setTempProduct] = useState({ size: "", topping: [] });
+  const [tempProduct, setTempProduct] = useState({ size: "s", topping: [], quantity: 1, tempPrice: 0 });
 
   useEffect(() => {
     dispatch(fetchDetailProduct(id)).then((value) => {
-      setTempPrice(value.payload.price);
+      setTempProduct({ ...tempProduct, tempPrice: value.payload.price });
     });
   }, [dispatch, id]);
   const chooseSize = (size = 's') => {
@@ -37,7 +36,7 @@ const ProductDetail = (props) => {
     setTempProduct({ ...tempProduct, size })
   }
   const setPrice = (product) => {
-    let price = tempPrice;
+    let price = tempProduct.tempPrice;
     price += product.size === 'l' ? 10000 : product.size === 'm' ? 6000 : 0;
     const toppingPrice = product.topping.reduce((total, current) => total + current.price, 0);
     price += toppingPrice;
@@ -57,6 +56,23 @@ const ProductDetail = (props) => {
     setTempProduct({ ...tempProduct, topping: updatedTopping });
   }
 
+  const removeActiveClass = (className) => {
+    const activeClassNode = document.getElementsByClassName(className);
+    for (var i = 0; i < activeClassNode.length; i++) {
+      activeClassNode[i].classList.remove('active');
+    }
+  }
+  const onChangeNumber = (value) => {
+    if (value === null) value = 1;
+    setTempProduct({ ...tempProduct, quantity: value });
+  };
+
+  const addToCart = () => {
+    removeActiveClass('product__info__item__list__topping');
+    removeActiveClass('product__info__item__list__item');
+    setTempProduct({ size: "s", topping: [], quantity: 1, tempPrice: product.detail.price });
+  }
+
   return (
     <>
       <div className='route d-flex'>
@@ -72,7 +88,7 @@ const ProductDetail = (props) => {
           <h2>
             {product?.detail?.title || <Skeleton height={'50px'} width={'300px'} />}
             <br />
-            <p>{product?.detail?.title ? (setPrice(tempProduct) + 'đ') : <Skeleton height={'50px'} />}</p>
+            <p>{product?.detail?.title ? ((setPrice(tempProduct) * tempProduct.quantity) + 'đ') : <Skeleton height={'50px'} />}</p>
           </h2>
           {
             product?.detail?.category === 'drink' &&
@@ -85,7 +101,8 @@ const ProductDetail = (props) => {
               </div>
             </>
           }
-          <Button className='button_add' size='large'>Thêm vào giỏ hàng</Button>
+          <div>Nhập số lượng: <InputNumber min={1} max={50} onChange={onChangeNumber} value={tempProduct.quantity} defaultValue={1} /></div>
+          <Button className='button_add' size='large' onClick={() => addToCart()}>Thêm vào giỏ hàng</Button>
         </div>
       </div>
     </>

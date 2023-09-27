@@ -31,7 +31,7 @@ export const productSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAllProduct.pending, (state) => {
+      .addCase([fetchAllProduct.pending, fetchDetailProduct.pending], (state) => {
         return {
           ...state, isLoading: true
         }
@@ -44,12 +44,6 @@ export const productSlice = createSlice({
       .addCase(fetchAllProduct.rejected, (state, action) => {
         return {
           ...state, isLoading: false, error: { ...state.error, error: action.error }
-        }
-      })
-
-      .addCase(fetchDetailProduct.pending, (state) => {
-        return {
-          ...state, isLoading: true
         }
       })
       .addCase(fetchDetailProduct.fulfilled, (state, action) => {
