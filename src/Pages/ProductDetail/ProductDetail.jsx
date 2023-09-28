@@ -9,6 +9,7 @@ import { AWS_CDN } from '../../environment';
 import { SizeDrink, ToppingDrink } from '../../Component';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { addToCart } from '../../store/reducer/cart.reducer';
 /**
 * @author
 * @function ProductDetail
@@ -67,9 +68,11 @@ const ProductDetail = (props) => {
     setTempProduct({ ...tempProduct, quantity: value });
   };
 
-  const addToCart = () => {
+  const addCart = () => {
     removeActiveClass('product__info__item__list__topping');
     removeActiveClass('product__info__item__list__item');
+    dispatch(addToCart(tempProduct));
+    console.log(tempProduct)
     setTempProduct({ size: "s", topping: [], quantity: 1, tempPrice: product.detail.price });
   }
 
@@ -102,7 +105,7 @@ const ProductDetail = (props) => {
             </>
           }
           <div>Nhập số lượng: <InputNumber min={1} max={50} onChange={onChangeNumber} value={tempProduct.quantity} defaultValue={1} /></div>
-          <Button className='button_add' size='large' onClick={() => addToCart()}>Thêm vào giỏ hàng</Button>
+          <Button className='button_add' size='large' onClick={() => addCart()}>Thêm vào giỏ hàng</Button>
         </div>
       </div>
     </>
