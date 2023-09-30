@@ -15,5 +15,8 @@
   "confirm": "Xác nhận",
   "pleaseInputYourEmail": "Vui lòng điền email!",
   "pleaseInputYourPassword": "Vui lòng điền Password!",
-  "welcomeToOurStore": "Chào mừng đến với cửa hàng"
+  "pleaseInputPhone": "Vui lòng điền số điện thoại",
+  "welcomeToOurStore": "Chào mừng đến với cửa hàng",
+  "telephoneNumber": "Số điện thoại",
+  "password": "Mật khẩu"
 }

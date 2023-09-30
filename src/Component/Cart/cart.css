@@ -24,3 +24,7 @@
   width: 100%;
   height: 40px;
 }
+
+.ant-form-item-control-input-content input {
+  padding: 12px 11px !important;
+}

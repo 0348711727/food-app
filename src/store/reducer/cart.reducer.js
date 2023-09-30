@@ -17,7 +17,7 @@ function compareData(obj1, obj2) {
   return str1 === str2;
 }
 
-export const cartReducer = createSlice({
+export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
@@ -44,5 +44,5 @@ export const cartReducer = createSlice({
     // })
   },
 })
-export const { addToCart } = cartReducer.actions;
-export default cartReducer.reducer;
+export const { addToCart } = cartSlice.actions;
+export default cartSlice.reducer;
