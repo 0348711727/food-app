@@ -13,6 +13,7 @@
   --second-font: "Lobster Two", cursive;
   --hover-text-color: hsl(34, 100%, 58%);
 
+  --button-color: hsl(37, 100%, 50%);
 
   --biggest-font-size: 4.125rem;
   --bigger-font-size: 3.125rem;
@@ -26,6 +27,8 @@
   --larger-font-size: 1.25rem;
   --large-font-size: 1.125rem;
   --normal-font-size: 1rem;
+  --small-font-size: 0.75rem;
+  --smaller-font-size: 0.5rem;
 
   --weight-400: 400;
   --weight-500: 500;
@@ -129,7 +132,8 @@ img {
   display: flex;
 }
 
-.cart {
+.cart_popup {
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -190,4 +194,14 @@ footer {
 
 .error {
   color: red;
+}
+
+.button {
+  background-color: var(--button-color);
+  font-weight: var(--weight-500);
+  color: white;
+
+  &:hover {
+    color: white !important;
+  }
 }
