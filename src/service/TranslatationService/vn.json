@@ -8,5 +8,12 @@
   "booking": "Đặt hàng",
   "cloudFee": "Cảm hứng Cloud Fee",
   "store": "Cửa hàng",
-  "hire": "Tuyển dụng"
+  "hire": "Tuyển dụng",
+  "submit": "Xác nhận",
+  "login": "Đăng nhập",
+  "signup": "Đăng xuất",
+  "confirm": "Xác nhận",
+  "pleaseInputYourEmail": "Vui lòng điền email!",
+  "pleaseInputYourPassword": "Vui lòng điền Password!",
+  "welcomeToOurStore": "Chào mừng đến với cửa hàng"
 }

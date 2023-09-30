@@ -8,5 +8,12 @@
   "booking": "Booking",
   "cloudFee": "Cloud Fee Inspỉation",
   "store": "Store",
-  "hire": "Hiring"
+  "hire": "Hiring",
+  "submit": "Submit",
+  "login": "Login",
+  "signup": "Sign Up",
+  "confirm": "Confirm",
+  "pleaseInputYourEmail": "Please input your username!",
+  "pleaseInputYourPassword": "Please input your Password!",
+  "welcomeToOurStore": "Welcome to Our Store"
 }

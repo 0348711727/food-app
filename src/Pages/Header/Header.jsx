@@ -5,6 +5,7 @@ import { DownOutlined } from '@ant-design/icons'
 import { Dropdown, Space } from 'antd'
 import { SubMenus, MainMenus, TranslateLang, language } from '../../Utils/constant';
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 function Header() {
   const items = TranslateLang;
   const [t, i18n] = useTranslation('common');
@@ -53,14 +54,14 @@ function Header() {
           </ul>
         </div>
         <nav className="nav container" id="container">
-          <a href="/">
-            <img className='header-logo' src={logo} alt='img search' onClick={onClick} />
-          </a>
+          <Link to="/">
+            <img className='header-logo' src={logo} alt='img search' />
+          </Link>
           <div className='header-main'>
             <ul className="nav__list">
               {MainMenus && MainMenus.map(({ label, key }) => (
                 <li className="nav__link" key={key}>
-                  <a href={label}>{t(label)}</a>
+                  <Link to={label}>{t(label)}</Link>
                 </li>
               ))}
             </ul>

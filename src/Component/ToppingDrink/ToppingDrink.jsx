@@ -8,13 +8,13 @@ import { FormatLocaleNumber } from '../../Utils/formatLocaleNumber';
 **/
 
 const ToppingDrink = ({ chooseTopping }) => {
-  const toppingList = useSelector(state => state.products.detail.topping);
+  const toppingList = useSelector(state => state.products?.detail?.topping) || [];
   return (
     <div>
-      {toppingList.length && <p>Topping</p>}
+      <p>Topping</p>
       <div className='d-flex flex_wrap'>
         {
-          toppingList.length && toppingList.map((value, index) =>
+          toppingList.length > 0 && toppingList.map((value, index) =>
             <div
               key={value.title}
               className='product__info__item__list__topping'

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import './drink.css';
 import Loading from '../Loading/Loading';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -13,6 +13,7 @@ import banner5 from '../../assets/banner5.webp';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllProduct } from '../../store/reducer/product.reducer';
 import { AWS_CDN } from '../../environment';
+import { Link } from 'react-router-dom';
 const Drink = () => {
   const dispatch = useDispatch();
   const productState = useSelector(state => state.products);
@@ -44,9 +45,9 @@ const Drink = () => {
           {
             [banner1, banner2, banner3, banner4, banner5].map((value, index) => (
               <div className='menu_item_carousel' key={index}>
-                <a data-tooltip-id="my-tooltip" data-tooltip-content='' href='/collections/all'>
+                <Link data-tooltip-id="my-tooltip" data-tooltip-content='' to='/collections/all'>
                   <LazyLoadImage className='lazyloaded' key={value} src={value} alt='banner' />
-                </a>
+                </Link>
               </div>
             ))
           }
@@ -61,17 +62,17 @@ const Drink = () => {
           </div>
         </form> */}
         <div className='menu_item menu_banner'>
-          <a data-tooltip-id="my-tooltip" data-tooltip-content='Trà xanh tây bắc' href='/'>
+          <Link data-tooltip-id="my-tooltip" data-tooltip-content='Trà xanh tây bắc' to='/'>
             <LazyLoadImage className='lazyloaded' alt="Trà xanh tây bắc" src='https://file.hstatic.net/1000075078/file/banner_app_2_c3dea7cad7cb4fad94f162ea6ccd388b.jpg' />
-          </a>
+          </Link>
         </div>
         {
           productState.data && productState.data.map(({ imageName, title, price }, index) => (
             <div className='menu_item' key={index}>
               <div className='menu_item_image'>
-                <a data-tooltip-id="my-tooltip" data-tooltip-content={title} href={`/product/${imageName}`}>
+                <Link data-tooltip-id="my-tooltip" data-tooltip-content={title} to={`/product/${imageName}`}>
                   <LazyLoadImage className='lazyloaded' effect="blur" key={imageName} src={`${AWS_CDN}${imageName}.webp`} alt='drink' />
-                </a>
+                </Link>
               </div>
               <div className='menu_item_info'>
                 <h3>{title}</h3>
