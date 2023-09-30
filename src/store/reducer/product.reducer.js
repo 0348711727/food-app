@@ -37,21 +37,30 @@ export const productSlice = createSlice({
         }
       })
       .addCase(fetchAllProduct.fulfilled, (state, action) => {
+        if (action.payload.success) {
+          return {
+            ...state, isLoading: false, data: action.payload.data, error: null
+          }
+        }
         return {
-          ...state, isLoading: false, data: action.payload.data, error: null
+          ...state, isLoading: false, error: action.payload
         }
       })
       .addCase(fetchAllProduct.rejected, (state, action) => {
         return {
-          ...state, isLoading: false, error: { ...state.error, error: action.error }
+          ...state, isLoading: false, error: action.error.message
         }
       })
       .addCase(fetchDetailProduct.fulfilled, (state, action) => {
-        return { ...state, isLoading: false, detail: action.payload }
+        if (action.payload.success) {
+          return { ...state, isLoading: false, detail: action.payload, error: null }
+        }
+        return { ...state, isLoading: false, error: action.payload }
+
       })
       .addCase(fetchDetailProduct.rejected, (state, action) => {
         return {
-          ...state, isLoading: false, error: { ...state.error, error: action.error }
+          ...state, isLoading: false, error: action.error
         }
       })
   },

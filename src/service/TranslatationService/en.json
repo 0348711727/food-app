@@ -15,5 +15,8 @@
   "confirm": "Confirm",
   "pleaseInputYourEmail": "Please input your username!",
   "pleaseInputYourPassword": "Please input your Password!",
-  "welcomeToOurStore": "Welcome to Our Store"
+  "pleaseInputPhone": "Please Input Phone",
+  "welcomeToOurStore": "Welcome to Our Store",
+  "telephoneNumber": "Telephone Number",
+  "password": "Password"
 }

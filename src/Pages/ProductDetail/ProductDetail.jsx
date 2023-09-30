@@ -78,7 +78,7 @@ const ProductDetail = (props) => {
     api[type]({
       message: 'Đã thêm sản phẩm vào giỏ hàng ',
       description:
-        `${product.detail.title} đã được thêm vào giỏ hàng`,
+        `${product.detail.title} size (${tempProduct.size.toUpperCase()}) đã được thêm vào giỏ hàng`,
     });
     setTempProduct({ size: "s", topping: [], quantity: 1, tempPrice: product.detail.price });
   }
