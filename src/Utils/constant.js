@@ -56,7 +56,17 @@ const TranslateLang = [
     key: 'en'
   }
 ]
-export { SubMenus, MainMenus, TranslateLang }
+const Logout = [
+  {
+    label: 'Logout',
+    key: 'logout'
+  },
+  {
+    label: 'en',
+    key: 'en'
+  }
+]
+export { SubMenus, MainMenus, TranslateLang, Logout }
 
 export const language = {
   vn: 'vn',
