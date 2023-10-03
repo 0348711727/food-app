@@ -1,17 +1,21 @@
 import { useTranslation } from "react-i18next";
 import './header.css';
 import logo from '../../assets/logo.png';
-import { DownOutlined } from '@ant-design/icons'
+import { DownOutlined, UserOutlined } from '@ant-design/icons'
 import { Dropdown, Space } from 'antd'
-import { SubMenus, MainMenus, TranslateLang, language } from '../../Utils/constant';
+import { SubMenus, MainMenus, TranslateLang, language, Logout } from '../../Utils/constant';
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 function Header() {
   const items = TranslateLang;
+  const itemsDropdown = Logout;
   const [t, i18n] = useTranslation('common');
   const onClick = (e) => {
     [language.vn, language.en].includes(e.keyPath[0]) && (e.key === language.vn ? i18n.changeLanguage(language.vn) : i18n.changeLanguage(language.en));
   };
+  const onClickLogout = (e) => {
+    console.log(e)
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,14 +48,24 @@ function Header() {
   return (
     <>
       <header className="header">
-        <div className="subcontainer">
-          <ul className="nav__list">
-            {SubMenus && SubMenus.map(({ label, key, extraBefore, extraAfter, icon }) => (
-              <li className="nav__link" key={key}>
-                {extraBefore ? extraBefore + " " + t(label) : t(label) + " " + extraAfter} {icon}
-              </li>
-            ))}
-          </ul>
+        <div className="d-flex subcontainer">
+          <div className="">
+            <ul className="nav__list">
+              {SubMenus && SubMenus.map(({ label, key, extraBefore, extraAfter, icon }) => (
+                <li className="nav__link" key={key}>
+                  {extraBefore ? extraBefore + " " + t(label) : t(label) + " " + extraAfter} {icon}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <Dropdown menu={{ items, onClick }}>
+            <div className="nav__link" onClick={(e) => e.preventDefault()}>
+              <Space>
+                {i18n.language && i18n.language.toUpperCase()}
+                <DownOutlined />
+              </Space>
+            </div>
+          </Dropdown>
         </div>
         <nav className="nav container" id="container">
           <Link to="/">
@@ -67,10 +81,11 @@ function Header() {
             </ul>
           </div>
           <div className="burger-menu">&#9776;</div>
-          <Dropdown menu={{ items, onClick }}>
+          <Dropdown menu={{ items, onClickLogout }}>
             <div className="nav__link" onClick={(e) => e.preventDefault()}>
               <Space>
-                {i18n.language && i18n.language.toUpperCase()}
+                <UserOutlined style={{ fontSize: '1.5rem', cursor: 'pointer' }} />
+                {'Quang'}
                 <DownOutlined />
               </Space>
             </div>
